@@ -1,14 +1,47 @@
 {
   "name": "immigrantgreensite",
-  "version": "1.0.0",
-  "description": "",
-  "main": "demo.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "config": {
+    "presets": [
+      "neutrino-preset-airbnb-base",
+      "neutrino-preset-react",
+      "neutrino-preset-jest",
+      "neutrino-custom.js"
+    ],
+    "neutrino": {
+      "entry": {
+        "vendor": [
+          "react",
+          "react-dom",
+          "react-hot-loader",
+          "react-router-dom"
+        ]
+      },
+      "devServer": {
+        "compress": true,
+        "port": 9000
+      }
+    }
   },
-  "author": "",
-  "license": "MIT",
+  "scripts": {
+    "start": "neutrino start",
+    "build": "neutrino build",
+    "test": "neutrino test --coverage && codecov -t :3b6ec5bd-2831-4944-9fad-b2f4a88919c5",
+    "coverage": "neutrino test --coverage"
+  },
   "devDependencies": {
+    "codecov": "^1.0.1",
+    "enzyme": "^2.7.1",
+    "neutrino": "^4.3.1",
+    "neutrino-preset-airbnb-base": "^4.3.1",
+    "neutrino-preset-jest": "^4.3.0",
+    "neutrino-preset-react": "^4.2.3",
+    "react-addons-test-utils": "^15.4.2",
     "pdf2json": "1.1.7"
+  },
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-hot-loader": "next",
+    "react-router-dom": "next"
   }
 }
