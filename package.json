@@ -4,8 +4,7 @@
     "presets": [
       "neutrino-preset-airbnb-base",
       "neutrino-preset-react",
-      "neutrino-preset-jest",
-      "neutrino-custom.js"
+      "neutrino-preset-jest"
     ],
     "neutrino": {
       "entry": {
@@ -25,7 +24,7 @@
   "scripts": {
     "start": "neutrino start",
     "build": "neutrino build",
-    "test": "neutrino test --coverage && codecov -t :3b6ec5bd-2831-4944-9fad-b2f4a88919c5",
+    "test": "neutrino test --coverage && codecov",
     "coverage": "neutrino test --coverage"
   },
   "devDependencies": {
