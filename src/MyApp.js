@@ -27,7 +27,7 @@ import './app.css';
             // y: 9.546,
             // w: 33.75,
             // h: 1.673,
-            // clr: -1,
+            // clr: -1, //'clr' to reference a color with index in color dictionary
           
 // };
 // const pdfPageTexts = (props) => {
@@ -42,7 +42,7 @@ import './app.css';
             //   {
             //     T: 'USCIS%20%20',
             //     S: -1,
-            //     TS: [
+            //     TS: [ //_kFontStyles dictionary 
             //       0,
             //       15,
             //       1,
