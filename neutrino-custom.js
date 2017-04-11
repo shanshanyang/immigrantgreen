@@ -6,7 +6,8 @@ module.exports = neutrino => {
       .use('eslint')
         .tap(options => merge(options, {
           rules: {
-            semi: 'off'
+            semi: 'off',
+            "no-console":0,
           }
         }));
 };

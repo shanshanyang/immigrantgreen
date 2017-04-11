@@ -1,44 +1,45 @@
 import React from 'react';
-import PDF from './data/pdf';
-import SsHeader from './header';
+import { sections } from './components/firebase';
+import SectionList from './components/sectionList';
 import './app.css';
 
-// api
-import FirebaseApi from './api/firebase';
-
 // page navigation
-const routes = ['/about', '/contact'];
+// const routes = ['/about', '/contact'];
 
-const Pages = (props) => {
-  const pages = props.items.map((item, index) => (
-    <li key={index}>Page{index}</li>
-  ));
+class MyApp extends React.Component {
+  constructor(props) {
+    super(props);
 
-  return <ul>{pages}</ul>;
-};
+    this.state = {
+      sections: [],
+    };
+  }
 
-const Questions = (props) => {
-  const texts = props.items.Texts.map((item, index) => (
-    <div key={index}>
-      {decodeURIComponent(item.R[0].T)}
-    </div>
-  ));
+  componentDidMount() {
+    sections.once('value').then((snapshot) => {
+      const sectionVal = [];
+      snapshot.forEach((childSnapshot) => {
+        sectionVal.push(childSnapshot.val());
+      });
+      this.setState({
+        sections: sectionVal,
+      });
+    });
 
-  return <div> {texts} </div>;
-};
+    // fields.once('value').then((snapshot) => {
+    //   const filedsVal = [];
+    //   snapshot.forEach((childSnapshot) => {
+    //     filedsVal.push(childSnapshot.val());
+    //   });
+    //   this.setState({
+    //     fields: filedsVal,
+    //   });
+    // });
+  }
 
-const MyApp = () => {
-  const containerStyle = {
-    width: `${PDF.formImage.Width}%`,
-  };
-
-  return (
-    <div style={containerStyle} className="wrapper">
-      <SsHeader routes={routes} />
-      <Pages items={PDF.formImage.Pages} />
-      <Questions items={PDF.formImage.Pages[0]} />
-    </div>
-  );
-};
+  render() {
+    return <SectionList items={this.state.sections} />;
+  }
+}
 
 export default MyApp;
