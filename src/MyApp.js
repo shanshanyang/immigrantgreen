@@ -1,10 +1,12 @@
 import React from 'react';
-import { sections } from './components/firebase';
+// import Router from 'react-router-dom';
+import { rootRef, formFields } from './components/firebase';
 import SectionList from './components/sectionList';
 import './app.css';
 
-// page navigation
-// const routes = ['/about', '/contact'];
+// * Implement Router: landing page - dropdown with form list; tutorial on how to use the site; 
+// * select the form and display the entire form page
+
 
 class MyApp extends React.Component {
   constructor(props) {
@@ -16,25 +18,16 @@ class MyApp extends React.Component {
   }
 
   componentDidMount() {
-    sections.once('value').then((snapshot) => {
+    formFields.once('value').then((snapshot) => {
       const sectionVal = [];
       snapshot.forEach((childSnapshot) => {
         sectionVal.push(childSnapshot.val());
       });
+
       this.setState({
         sections: sectionVal,
       });
     });
-
-    // fields.once('value').then((snapshot) => {
-    //   const filedsVal = [];
-    //   snapshot.forEach((childSnapshot) => {
-    //     filedsVal.push(childSnapshot.val());
-    //   });
-    //   this.setState({
-    //     fields: filedsVal,
-    //   });
-    // });
   }
 
   render() {

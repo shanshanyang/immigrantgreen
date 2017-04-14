@@ -2,7 +2,6 @@
   "name": "immigrantgreensite",
   "config": {
     "presets": [
-      "neutrino-preset-airbnb-base",
       "neutrino-preset-react",
       "neutrino-preset-jest"
     ],

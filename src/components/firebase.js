@@ -1,6 +1,6 @@
 import * as firebase from 'firebase/firebase-browser';
 
-const form = firebase.initializeApp({
+const appdata = firebase.initializeApp({
   apiKey: 'AIzaSyAy2LfQBhpfM6gKT_3O-zBlYEO6cHordi4',
   authDomain: 'project-3216890005608163631.firebaseapp.com',
   databaseURL: 'https://project-3216890005608163631.firebaseio.com',
@@ -20,7 +20,8 @@ const form = firebase.initializeApp({
 //   return { token, user };
 // });
 
-const sections = firebase.database(form).ref('sections').orderByKey();
-const fields = firebase.database(form).ref('fields');
+const rootRef = firebase.database(appdata).ref("form1");
+const formSections = firebase.database(appdata).ref('form1/sections').orderByKey();
+const formFields = firebase.database(appdata).ref('form1/fields').orderByKey();
 
-export { sections, fields };
+export { rootRef, formSections, formFields };

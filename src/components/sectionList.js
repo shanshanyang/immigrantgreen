@@ -1,5 +1,5 @@
 import React from 'react';
-// import QuestionList from './QuestionList';
+import QuestionList from './QuestionList';
 
 class SectionList extends React.Component {
   constructor(props) {
@@ -10,25 +10,21 @@ class SectionList extends React.Component {
       isActive: false,
     };
 
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  componentDidMount() {
-    alert('mount');
+    // this.handleClick = this.handleClick.bind(this);
   }
 
   loadQuestions() {
     this.setState(prevState => ({
-      isActive: !prevState.isActive
+      isActive: !prevState.isActive,
     }));
-    alert('clicked');
   }
 
   render() {
-    const sections = props.items.map((item, index) => (
+    const sections = this.props.items.map((item, index) => (
       <li key={index}>
         <section>
           <h1 onClick={this.loadQuestions}>{item.label}</h1>
+          <QuestionList items={item} />
         </section>
       </li>
     ));
