@@ -1,6 +1,6 @@
 import React from 'react';
 // import Router from 'react-router-dom';
-import { rootRef, formFields } from './components/firebase';
+import { formSections } from './components/firebase';
 import SectionList from './components/sectionList';
 import './app.css';
 
@@ -13,25 +13,24 @@ class MyApp extends React.Component {
     super(props);
 
     this.state = {
-      sections: [],
+      sections: []
     };
   }
 
   componentDidMount() {
-    formFields.once('value').then((snapshot) => {
-      const sectionVal = [];
-      snapshot.forEach((childSnapshot) => {
-        sectionVal.push(childSnapshot.val());
-      });
-
-      this.setState({
-        sections: sectionVal,
+    let list = [];
+    formSections.on('value', (snap) => {
+      list = snap.val(); console.log(list, snap.key);
+       this.setState({
+        sections: list,
       });
     });
   }
 
   render() {
-    return <SectionList items={this.state.sections} />;
+    return (
+      <SectionList items={this.state.sections} />
+    );
   }
 }
 

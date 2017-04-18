@@ -20,8 +20,19 @@ const appdata = firebase.initializeApp({
 //   return { token, user };
 // });
 
-const rootRef = firebase.database(appdata).ref("form1");
-const formSections = firebase.database(appdata).ref('form1/sections').orderByKey();
-const formFields = firebase.database(appdata).ref('form1/fields').orderByKey();
+const db = firebase.database(appdata);
+const rootRef = db.ref("form1");
+const formSections = db.ref('form1/sections').orderByKey();
+const formFields = db.ref('form1/fields').orderByKey();
 
-export { rootRef, formSections, formFields };
+const getQuestionRef = (id) => {
+  const questionRef = db.ref(`form1/fields/${id}/questions`);
+  return questionRef;
+}
+
+const getSectionRef = (id) => {
+  const sectionRef = db.ref(`form1/sections/${id}`);
+  return sectionRef;
+}
+
+export { rootRef, formSections, formFields, getQuestionRef, getSectionRef };

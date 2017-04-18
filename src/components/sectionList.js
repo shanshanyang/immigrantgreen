@@ -1,5 +1,6 @@
 import React from 'react';
 import QuestionList from './QuestionList';
+import { getQuestionRef } from './firebase';
 
 class SectionList extends React.Component {
   constructor(props) {
@@ -8,28 +9,46 @@ class SectionList extends React.Component {
     this.state = {
       isLoaded: false,
       isActive: false,
+      index: 0,
+      questions: []
     };
 
     // this.handleClick = this.handleClick.bind(this);
   }
 
-  loadQuestions() {
-    this.setState(prevState => ({
-      isActive: !prevState.isActive,
-    }));
+  componentDidMount() {
+  }
+
+  loadQuestions(e) {
+  // Can i avoid use persist?
+    e.persist();
+
+    const index = Number(e.target.dataset.index);
+
+    getQuestionRef(index).on('value', (snap) => {
+      const qlist = snap.val();
+
+      this.setState({
+        questions: qlist,
+        index: index,
+        isLoaded: true
+      });
+    });
+
   }
 
   render() {
     const sections = this.props.items.map((item, index) => (
       <li key={index}>
-        <section>
-          <h1 onClick={this.loadQuestions}>{item.label}</h1>
-          <QuestionList items={item} />
-        </section>
+          <h1 onClick={(e) => this.loadQuestions(e)} data-index={index}>{item.label}</h1>
       </li>
     ));
+    
     return (
-      <ul>{sections}</ul>
+      <div>
+        <ul>{sections}</ul>
+        <QuestionList items={this.state.questions} />
+      </div>
     );
   }
 };
