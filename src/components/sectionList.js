@@ -1,6 +1,8 @@
 import React from 'react';
-import QuestionList from './QuestionList';
+import QuestionList from './questionList';
 import { getQuestionRef } from './firebase';
+import Text from 'material-ui/Text';
+
 
 class SectionList extends React.Component {
   constructor(props) {
@@ -12,11 +14,6 @@ class SectionList extends React.Component {
       index: 0,
       questions: []
     };
-
-    // this.handleClick = this.handleClick.bind(this);
-  }
-
-  componentDidMount() {
   }
 
   loadQuestions(e) {
@@ -27,7 +24,6 @@ class SectionList extends React.Component {
 
     getQuestionRef(index).on('value', (snap) => {
       const qlist = snap.val();
-
       this.setState({
         questions: qlist,
         index: index,
@@ -37,12 +33,27 @@ class SectionList extends React.Component {
 
   }
 
+
+  // if else template to render sub-title
   render() {
-    const sections = this.props.items.map((item, index) => (
-      <li key={index}>
-          <h1 onClick={(e) => this.loadQuestions(e)} data-index={index}>{item.label}</h1>
-      </li>
-    ));
+    const sections = this.props.items.map((item, index) => {
+      let subsections;
+      if (item.subsections) { 
+        subsections = item.subsections.map((item, index) => {
+          return (
+            <li key={index}>
+              <Text title="subtitle" onClick={(e) => this.loadQuestions(e)} data-index={index}>{item.label}</Text>
+            </li>
+          )
+        });
+      }
+      return (
+        <li key={index}>
+          <Text title="title" onClick={(e) => this.loadQuestions(e)} data-index={index}>{item.label}</Text>
+          <ul>{subsections}</ul>
+        </li>
+      );
+    });
     
     return (
       <div>

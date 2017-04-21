@@ -1,3 +1,9 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
 .wrapper {
   border: 2px solid pink;
+}
+li {
+  list-style: none;
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import QuestionOptions from './questionOption';
 
 const QuestionList = (props) => {
   if (!props.items.length) {
@@ -11,7 +12,9 @@ const QuestionList = (props) => {
     <li key={index}>
       <p>{item.id}</p>  
       <p>{item.label}</p>
-      <input type='{item.type}'></input>
+      {item.type}
+      {item.required}
+      <QuestionOptions options={item.options} type={item.type}/>
     </li>
   ));
   
